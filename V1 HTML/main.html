@@ -1,0 +1,126 @@
+  <!-- Collapsible top panel -->
+  <div class="top-panel" id="topPanel" style="max-height: 420px;">
+    <div class="toggle-row">
+      <div class="radio" role="tablist" aria-label="Search Mode">
+        <button class="active" id="modeCode" aria-selected="true">Product Code Search</button>
+        <button id="modeQn" aria-selected="false">Questionnaire Search</button>
+      </div>
+      <div class="grow"></div>
+    </div>
+
+    <div class="stack">
+      <!-- Code search -->
+      <div id="panelCode">
+        <input id="codeInput" type="text" placeholder="Enter full product code…" value='63_PK_PV_BR_MRP_975_FT_Pr_Eq_14L_12"9.5F_02_KYGH_Q8' />
+      </div>
+
+      <!-- Questionnaire -->
+      <div id="panelQn" class="hidden">
+        <div class="grid-2">
+          <!-- Left form -->
+          <div>
+            <div class="row">
+              <label style="display:flex;flex-direction:column;gap:6px">
+                <span style="color:var(--sub);font-size:12px">Material</span>
+                <select id="mat">
+                  <option value=""></option>
+                  <option>Charcoal</option>
+                  <option>PVC</option>
+                  <option>WPC</option>
+                  <option>Super Heavy</option>
+                  <option>Ultra Voilet Foarm Sheet</option>
+                  <option>Ultra Voilet Marble Sheet</option>
+                  <option>Tiger Fabric</option>
+                  <option>Acrylic</option>
+                </select>
+              </label>
+            </div>
+            <div class="row">
+              <label style="display:flex;flex-direction:column;gap:6px">
+                <span style="color:var(--sub);font-size:12px">Height</span>
+                <select id="height">
+                  <option value=""></option>
+                  <option>8F</option>
+                  <option>9F</option>
+                  <option>9.5F</option>
+                </select>
+              </label>
+              <label style="display:flex;flex-direction:column;gap:6px">
+                <span style="color:var(--sub);font-size:12px">Width (inches)</span>
+                <input id="width" type="text" placeholder='e.g., 12"' />
+              </label>
+            </div>
+            <div class="row">
+              <label style="display:flex;flex-direction:column;gap:6px">
+                <span style="color:var(--sub);font-size:12px">Colour</span>
+                <select id="color">
+                  <option value=""></option>
+                  <option>Red</option><option>Black</option><option>Gold</option><option>Silver</option>
+                  <option>Teak</option><option>Walnut</option><option>Yellow</option><option>Blue</option>
+                  <option>Steel</option><option>Grey</option><option>Brown</option><option>White</option>
+                  <option>Purple</option><option>Green</option><option>Rose Gold</option><option>Beage</option>
+                  <option>Cream</option><option>Mobe</option><option>Metalic</option><option>Marble</option>
+                </select>
+              </label>
+            </div>
+          </div>
+
+          <!-- Right: Design toolbox -->
+          <div class="toolbox">
+            <h3>Pattern Type</h3>
+            <div class="section">
+              <label class="cb"><input type="checkbox" value="FT" />Flutted</label>
+              <label class="cb"><input type="checkbox" value="EQ" />Equal Distance Between The Lines</label>
+              <label class="cb"><input type="checkbox" value="L" />Line</label>
+              <label class="cb"><input type="checkbox" value="S" />Step</label>
+              <label class="cb"><input type="checkbox" value="DT" />Double Tone</label>
+              <label class="cb"><input type="checkbox" value="RD" />Rounded</label>
+              <label class="cb"><input type="checkbox" value="LV" />Louver Style</label>
+            </div>
+            <h3>Surface Finish</h3>
+            <div class="section">
+              <label class="cb"><input type="checkbox" value="TX" />Texture</label>
+              <label class="cb"><input type="checkbox" value="MTT" />Matt</label>
+              <label class="cb"><input type="checkbox" value="SL" />Seamless</label>
+              <label class="cb"><input type="checkbox" value="PR" />Printed</label>
+              <label class="cb"><input type="checkbox" value="WD" />Wooden</label>
+            </div>
+            <h3>Special Types</h3>
+            <div class="section">
+              <label class="cb"><input type="checkbox" value="DMS" />Digital Marble Sheet</label>
+              <label class="cb"><input type="checkbox" value="FMS" />Flutted Marble Sheet</label>
+              <label class="cb"><input type="checkbox" value="BMDM" />Book Match Digital Marble</label>
+              <label class="cb"><input type="checkbox" value="DMGL" />Digital Marble Gold Line</label>
+              <label class="cb"><input type="checkbox" value="H3D" />High/3D Sheet</label>
+              <label class="cb"><input type="checkbox" value="PL" />Panel No Line</label>
+              <label class="cb"><input type="checkbox" value="VO" />Volume</label>
+              <label class="cb"><input type="checkbox" value="CT" />Catalogue</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /Questionnaire -->
+    </div>
+  </div>
+
+  <div class="filters" id="filtersLabel">No filters applied</div>
+
+  <div class="controls">
+    <button class="btn primary" id="btnSearch">Search</button>
+    <button class="btn" id="btnClear">Clear All</button>
+    <button class="btn cart" id="btnCart">Add Selected to Cart</button>
+  </div>
+
+  <div class="split">
+    <div class="list" id="resultsList" aria-label="Search Results"></div>
+    <div class="preview" id="previewPane">
+      <div class="ph">Preview will appear here</div>
+    </div>
+  </div>
+
+  <div class="debug-bar">
+    <button class="btn" id="btnReopen">See questionnaire</button>
+    <button class="btn" id="btnDebug">Show Last Debug Info</button>
+    <button class="btn warn" id="btnRefresh">Refresh Cache</button>
+  </div>
+</div>
