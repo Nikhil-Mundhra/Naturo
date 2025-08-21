@@ -3,6 +3,9 @@ Generate a vCard QR code + .vcf for:
 Naturo Surfaces — Harish Mundhra (Director of Sales & Marketing)
 
 How to use:
+
+python3 -m pip install --upgrade pip setuptools wheel
+python3 -m pip install Pillow
 1) pip install qrcode[pil]
 2) python make_vcard_qr.py
 Outputs:
@@ -28,7 +31,7 @@ def esc(s: str) -> str:
          .replace("\n", r"\n")
     )
 
-org = "Naturo Surfaces"
+org = "Naturo Industries"
 full_name = "Harish Mundhra"
 last_name, first_name = "Mundhra", "Harish"
 title = "Director of Sales & Marketing"
@@ -36,38 +39,53 @@ website = "https://www.naturoindustries.com"
 customer_care = "+919711604243"  # Customer Care
 work_phone = "+919717246783"  # Work phone
 personal_phone = "+919312064243"  # Personal phone
+email = "naturoindustries@gmail.com"
 
 
 # Addresses (street, city/locality, region/state, postal, country, label)
 head_office = (
-    "79, Ground Floor, West Mukherjee Nagar",
-    "New Delhi",
-    "Delhi",
-    "110009",
+    "79, West Mukherjee Nagar", 
+    "Kingsway Camp",
+    "New Delhi 110009",
     "India",
-    "Head Office\n79, Ground Floor, West Mukherjee Nagar, New Delhi, Delhi, 110009."
+    "Head Office\n79, West Mukherjee Nagar, Kingsway Camp, New Delhi, Delhi, 110009."
 )
 marketing_office = (
     "S3061, Akshar Business Park, Sector No. 25, Vashi",
     "Navi Mumbai",
-    "Maharashtra",
-    "400703",
+    "Maharashtra 400703",
     "India",
     "Marketing Office\nS3061, Akshar Business Park, Sector No. 25, Vashi, Navi Mumbai, Maharashtra 400703."
 )
 experience_center = (
-    "Plot No. 1, Basement Floor, Desh Bandhu Gupta Rd, Bazar Sangatrashan, Chuna Mandi, Paharganj",
-    "New Delhi",
-    "Delhi",
-    "110055",
+    "Plot No. 1, Basement Floor, Desh Bandhu Gupta Rd,",
+    "Chuna Mandi, Paharganj",
+    "New Delhi 110055",
     "India",
-    "Experience Center\nPlot No. 1, Basement Floor, Desh Bandhu Gupta Rd, Bazar Sangatrashan, Chuna Mandi, Paharganj, New Delhi, Delhi 110055."
+    "Experience Center\nPlot No. 1, Basement Floor, Desh Bandhu Gupta Rd, Chuna Mandi, Paharganj, New Delhi 110055."
 )
 
 manufacturing_setups = [
-    "Sonipat, Haryana",
-    "Yamuna Nagar, Haryana",
-    "Barelli, Uttar Pradesh",  # kept exactly as provided
+    "Sonipat & Yamuna Nagar, Haryana",
+    "Lucknow & Barelli, Uttar Pradesh",
+    "Morbi, Gujrat", 
+    "Puna, Maharashtra",
+]
+
+Surface_products = [
+        "Surface Products\n",
+        "HPL Laminate: Liner / 1mm / 0.8mm\n",
+        "Wood Veneer: Natural & Recon\n",
+        "Exterior Cladding: HPL / Facade\n",
+        "UV Marble Sheets / 3D Sheets\n",
+        "Digital / Fluted Marble Sheets\n",
+        "Flooring: PVC / SPC / Wooden\n",
+        "Highlighters: SCP / Charcoal\n",
+        "Pre / Acrylic / Veneer / Deco\n",
+        "Book Match Digital Marble\n",
+        "Louver Panels: PVC / WPC\n",
+        "Laminates: PVC / Acrylic\n",
+        "Edge Band Tape",
 ]
 
 # Build vCard 3.0 (widely supported by iOS/Android)
@@ -82,10 +100,10 @@ vcard = dedent(f"""\
     TEL;TYPE=WORK,VOICE:{esc(work_phone)}
     TEL;TYPE=Personal,VOICE:{esc(personal_phone)}
     URL:{esc(website)}
-    ADR;TYPE=Head Office;LABEL={esc(head_office[5])}:;;{esc(head_office[0])};{esc(head_office[1])};{esc(head_office[2])};{esc(head_office[3])};{esc(head_office[4])}
-    ADR;TYPE=Marketing Office;LABEL={esc(marketing_office[5])}:;;{esc(marketing_office[0])};{esc(marketing_office[1])};{esc(marketing_office[2])};{esc(marketing_office[3])};{esc(marketing_office[4])}
-    ADR;TYPE=Experience Center;LABEL={esc(experience_center[5])}:;;{esc(experience_center[0])};{esc(experience_center[1])};{esc(experience_center[2])};{esc(experience_center[3])};{esc(experience_center[4])}
-    NOTE:{esc("Manufacturing Setups: \n" + ";\n".join(manufacturing_setups))}
+    ADR;TYPE=Head Office;LABEL={esc(head_office[4])}:;;{esc(head_office[0])};{esc(head_office[1])};{esc(head_office[2])};{esc(head_office[3])}
+    ADR;TYPE=Marketing Office;LABEL={esc(marketing_office[4])}:;;{esc(marketing_office[0])};{esc(marketing_office[1])};{esc(marketing_office[2])};{esc(marketing_office[3])}
+    ADR;TYPE=Experience Center;LABEL={esc(experience_center[4])}:;;{esc(experience_center[0])};{esc(experience_center[1])};{esc(experience_center[2])};{esc(experience_center[3])}
+    NOTE:{esc("Manufacturing Setups: \n" + ";\n".join(manufacturing_setups)) + ";\n" + "".join(Surface_products)}
     END:VCARD
 """).strip()
 

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Naturo Surfaces — Harish Mundhra Contact</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body { font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; background:#fafafa; margin:0; padding:24px; }
+    .card { max-width: 960px; margin: 0 auto; background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:24px; }
+    .grid { display:grid; grid-template-columns:180px 1fr; gap:20px; align-items:start; }
+    canvas { border-radius:8px; border:1px solid #f0f0f0; }
+    h2 { margin:0 0 6px; font-size:22px; font-weight:700; color:#111827; }
+    .muted { color:#6b7280; font-size:12px; margin-top:8px; text-align:center; }
+    .role { margin:0 0 14px; font-size:14px; color:#374151; }
+    .kv { display:grid; grid-template-columns:140px 1fr; gap:8px 12px; font-size:14px; color:#111827; }
+    .kv .label { color:#6b7280; }
+    hr { margin:16px 0; border:0; height:1px; background:#f3f4f6; }
+    details { margin-top:10px; font-size:13px; color:#374151; }
+    .actions { margin-top:16px; display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+    .btn { background:#111827; color:#fff; border:0; padding:10px 14px; border-radius:8px; cursor:pointer; font-size:14px; }
+    .btn.secondary { background:#f3f4f6; color:#111827; border:1px solid #e5e7eb; }
+    .link { color:#2563eb; text-decoration:none; }
+    .fallback { font-size:13px; color:#6b7280; text-decoration:none; }
+    .notice { margin-top:10px; font-size:12px; color:#6b7280; }
+    ul { margin: 8px 0 0 18px; padding:0; }
+    li { margin: 2px 0; }
+  </style>
+</head>
+<body>
+  <section class="card" aria-label="Contact card for Harish Mundhra">
+    <div class="grid">
+      <!-- QR -->
+      <div style="text-align:center;">
+        <canvas id="vcard-qr" width="180" height="180" role="img" aria-label="QR code for Harish Mundhra vCard"></canvas>
+        <div class="muted">Scan to save contact</div>
+        <noscript><p class="muted">JavaScript is off — QR preview unavailable.</p></noscript>
+      </div>
+
+      <!-- Details -->
+      <div>
+        <h2>Naturo Surfaces — Harish Mundhra</h2>
+        <div class="role">Director of Sales &amp; Marketing</div>
+
+        <div class="kv">
+          <div class="label">Website</div>
+          <div><a class="link" href="https://www.naturoindustries.com" target="_blank" rel="noopener">naturoindustries.com</a></div>
+
+          <div class="label">Email</div>
+          <div><a class="link" href="mailto:naturoindustries@gmail.com">naturoindustries@gmail.com</a></div>
+
+          <div class="label">Customer Care</div>
+          <div><a class="link" href="tel:+919711604243" style="color:#111827;text-decoration:none;">+91 97116 04243</a></div>
+
+          <div class="label">Work</div>
+          <div><a class="link" href="tel:+919717246783" style="color:#111827;text-decoration:none;">+91 97172 46783</a></div>
+
+          <div class="label">Personal</div>
+          <div><a class="link" href="tel:+919312064243" style="color:#111827;text-decoration:none;">+91 93120 64243</a></div>
+        </div>
+
+        <hr />
+
+        <div class="kv" style="grid-template-columns:160px 1fr;">
+          <div class="label">Head Office</div>
+          <div>79, West Mukherjee Nagar, Kingsway Camp, New Delhi, Delhi, 110009, India</div>
+
+          <div class="label">Marketing Office</div>
+          <div>S3061, Akshar Business Park, Sector No. 25, Vashi, Navi Mumbai, Maharashtra 400703, India</div>
+
+          <div class="label">Experience Center</div>
+          <div>Plot No. 1, Basement Floor, Desh Bandhu Gupta Rd, Chuna Mandi, Paharganj, New Delhi, Delhi 110055, India</div>
+        </div>
+
+        <details open>
+          <summary>Manufacturing Setups</summary>
+          <ul>
+            <li>Sonipat &amp; Yamuna Nagar, Haryana</li>
+            <li>Lucknow &amp; Barelli, Uttar Pradesh</li>
+            <li>Morbi, Gujarat</li>
+            <li>Puna, Maharashtra</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>Surface Products</summary>
+          <ul>
+            <li>HPL Laminate: Liner / 1mm / 0.8mm</li>
+            <li>Wood Veneer: Natural &amp; Recon</li>
+            <li>Exterior Cladding: HPL / Facade</li>
+            <li>UV Marble Sheets / 3D Sheets</li>
+            <li>Digital / Fluted Marble Sheets</li>
+            <li>Flooring: PVC / SPC / Wooden</li>
+            <li>Highlighters: SCP / Charcoal</li>
+            <li>Pre / Acrylic / Veneer / Deco</li>
+            <li>Book Match Digital Marble</li>
+            <li>Louver Panels: PVC / WPC</li>
+            <li>Laminates: PVC / Acrylic</li>
+            <li>Edge Band Tape</li>
+          </ul>
+        </details>
+
+        <div class="actions">
+          <a id="vcf-direct" class="btn" href="#" download="Harish_Mundhra.vcf">Download Contact (.vcf)</a>
+          <button id="download-vcf-btn" type="button" class="btn secondary">Download via Blob</button>
+          <a class="fallback" href="Harish_Mundhra.vcf" download>Direct VCF (static file)</a>
+          <button id="download-qr" type="button" class="btn secondary">Download QR (PNG)</button>
+        </div>
+
+        <p id="localNotice" class="notice" hidden>
+          Tip: if downloads act weird when opening this file directly, run a simple local server:<br>
+          <code>python3 -m http.server</code> and open <code>http://localhost:8000/harish-contact.html</code>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- QR encoder -->
+  <script>
+    (function loadQrLib() {
+      const s = document.createElement('script');
+      s.src = "https://unpkg.com/qrcode@1.5.3/build/qrcode.min.js";
+      s.async = true;
+      s.onload = () => window.__qrReady = true;
+      document.head.appendChild(s);
+    })();
+  </script>
+
+  <script>
+    function escV(s) { return s.replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,'); }
+    function foldVCard(text) {
+      const lines = text.replace(/\r\n/g, '\n').split('\n');
+      const out = [];
+      for (const line of lines) {
+        if (line.length <= 75) { out.push(line); continue; }
+        for (let i = 0; i < line.length; i += 75) {
+          out.push(i === 0 ? line.slice(i, i+75) : ' ' + line.slice(i, i+75));
+        }
+      }
+      return out.join('\r\n');
+    }
+
+    function buildVCard() {
+      const lines = [];
+      lines.push('BEGIN:VCARD');
+      lines.push('VERSION:3.0');
+      lines.push('N:' + ['Mundhra','Harish','','',''].map(escV).join(';'));
+      lines.push('FN:' + escV('Harish Mundhra'));
+      lines.push('ORG:' + escV('Naturo Industries'));
+      lines.push('TITLE:' + escV('Director of Sales & Marketing'));
+      lines.push('EMAIL:' + escV('naturoindustries@gmail.com'));
+      lines.push('TEL;TYPE=Customer Care,VOICE:+919711604243');
+      lines.push('TEL;TYPE=WORK,VOICE:+919717246783');
+      lines.push('TEL;TYPE=Personal,VOICE:+919312064243');
+      lines.push('URL:https://www.naturoindustries.com');
+
+      const adr = (label, street, city, region, postal, country) =>
+        `ADR;TYPE=${label};LABEL=${escV(label)}:;;${escV(street)};${escV(city)};${escV(region)};${escV(postal)};${escV(country)}`;
+
+      lines.push(adr('Head Office','79, West Mukherjee Nagar','Kingsway Camp','New Delhi','110009','India'));
+      lines.push(adr('Marketing Office','S3061, Akshar Business Park, Sector No. 25, Vashi','Navi Mumbai','Maharashtra','400703','India'));
+      lines.push(adr('Experience Center','Plot No. 1, Basement Floor, Desh Bandhu Gupta Rd','Chuna Mandi, Paharganj','New Delhi','110055','India'));
+
+      // Manufacturing setups + product range in NOTE
+      // Manufacturing setups + product range in NOTE
+      lines.push('NOTE:' + escV(
+        "Manufacturing Setups\n" +
+        "Sonipat & Yamuna Nagar, Haryana\n" +
+        "Lucknow & Barelli, Uttar Pradesh\n" +
+        "Morbi, Gujarat\n" +
+        "Puna, Maharashtra\n\n" +
+        "Surface Products\n" +
+        "HPL Laminate: Liner / 1mm / 0.8mm\n" +
+        "Wood Veneer: Natural & Recon\n" +
+        "Exterior Cladding: HPL / Facade\n" +
+        "UV Marble Sheets / 3D Sheets\n" +
+        "Digital / Fluted Marble Sheets\n" +
+        "Flooring: PVC / SPC / Wooden\n" +
+        "Highlighters: SCP / Charcoal\n" +
+        "Pre / Acrylic / Veneer / Deco\n" +
+        "Book Match Digital Marble\n" +
+        "Louver Panels: PVC / WPC\n" +
+        "Laminates: PVC / Acrylic\n" +
+        "Edge Band Tape"
+      ));
+      lines.push('END:VCARD');
+      return foldVCard(lines.join('\r\n'));
+    }
+
+    function isSafariLike() {
+      const ua = navigator.userAgent;
+      return /iPhone|iPad|iPod/i.test(ua) || /^((?!chrome|android).)*safari/i.test(ua);
+    }
+
+    (function init() {
+      const vcard = buildVCard();
+      const dataUrl = 'data:text/vcard;charset=utf-8,' + encodeURIComponent(vcard);
+
+      document.getElementById('vcf-direct').href = dataUrl;
+
+      document.getElementById('download-vcf-btn').addEventListener('click', () => {
+        if (isSafariLike()) { window.open(dataUrl,'_blank'); return; }
+        const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url; a.download = 'Harish_Mundhra.vcf';
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      });
+
+      const canvas = document.getElementById('vcard-qr');
+      const renderQR = () => { if (window.QRCode) window.QRCode.toCanvas(canvas, vcard, { width:180, margin:1 }); };
+      if (window.__qrReady) renderQR(); else window.addEventListener('load', renderQR);
+
+      document.getElementById('download-qr').addEventListener('click', () => {
+        const url = canvas.toDataURL('image/png');
+        const a = document.createElement('a');
+        a.href = url; a.download = 'Harish_Mundhra_QR.png';
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      });
+
+      if (location.protocol === 'file:') document.getElementById('localNotice').hidden = false;
+    })();
+  </script>
+</body>
+</html>

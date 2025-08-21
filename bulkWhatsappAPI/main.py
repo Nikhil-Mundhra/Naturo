@@ -1,10 +1,12 @@
 # whatsapp_bulk_app.py
 # alias python=python3
-# python3 -m venv path/to/venv     
+# python3 -m venv path/to/venv   or     python3 -m venv venv  
 # source path/to/venv/bin/activate
 # pip install streamlit pandas requests
 # streamlit run bulkWhatsappAPI/main.py
-# pip install pyinstaller
+# pip install pyinstallerrm -rf venv
+# pyinstaller --onefile --windowed bulkWhatsappAPI/main.py (for macOS)
+# git remote set-url origin https://github.com/Nikhil-Mundhra/Naturo.git
 
 import streamlit as st
 import pandas as pd
