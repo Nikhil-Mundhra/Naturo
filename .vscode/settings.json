@@ -1,0 +1,7 @@
+{
+    "git.autofetch": false,
+    "git-auto-commit.enable": true,
+    "git-auto-commit.commitMessage": "Auto commit at ${date} ${time}",
+    "git-auto-commit.interval": 300,
+    "git-auto-commit.autoPush": true
+}
