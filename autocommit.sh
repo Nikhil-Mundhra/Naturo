@@ -14,6 +14,9 @@ done
 # to run it forever
 # nohup bash autocommit.sh &
 
+# to check logs: git log --oneline | head -n 5
+
 # to stop it later
 # ps aux | grep autocommit
-# kill <PID>
+# You will see something like: nikhil   44705   0.0  bash autocommit.sh
+# kill <PID> (Eg. kill 44705)
