@@ -1,4 +1,11 @@
-# Makefile
+# Makefile for Naturo Product Search V2
+# ----------------------
+# Usage:
+#   make clean      # remove build artifacts
+#   make install    # setup venv and dependencies
+#   make run        # run app from venv
+#   make build      # build executable
+# ----------------------
 
 # Config
 PY        := python3
@@ -6,41 +13,78 @@ VENV_DIR  := .venv
 PYTHON    := $(VENV_DIR)/bin/python
 PIP       := $(VENV_DIR)/bin/pip
 
-.PHONY: venv install run clean freeze upgrade deps
+# Detect OS for PyInstaller --add-data syntax
+ifeq ($(OS),Windows_NT)
+    ADDDATA := Final_Release;Final_Release
+    EXE_EXT := .exe
+else
+    ADDDATA := Final_Release:Final_Release
+    EXE_EXT :=
+endif
 
-# Create virtual environment
+.PHONY: venv install run build clean freeze upgrade deps
+
+
+# ----------------------
+# Virtual environment
+# ----------------------
 venv:
 	$(PY) -m venv $(VENV_DIR)
 
-# Install project dependencies
+# ----------------------
+# Install dependencies
+# ----------------------
 install: venv
-	$(PIP) install --upgrade pip
-	$(PIP) install PySide6 pillow flask pywebview
-# Prefer requirements.txt if you have one; otherwise install directly:
-# $(PIP) install -r requirements.txt
-	$(PIP) install PySide6 pillow
+	$(PIP) install --upgrade pip setuptools wheel
+	$(PIP) install -r requirements.txt || true
+	$(PIP) install PySide6 pillow flask pywebview pyinstaller
 
-# Run the app as a package (requires V2/__init__.py and V2/main.py)
+# ----------------------
+# Run the app
+# ----------------------
 run: venv
 	$(PYTHON) -m Final_Release.main
 
-# Optional: show exact versions locked from current venv
+
+# ----------------------
+# Build executable
+# ----------------------
+build: venv
+	$(PYTHON) -m PyInstaller \
+		--noconfirm \
+		--onefile \
+		--windowed \
+		--name NaturoApp$(EXE_EXT) \
+		--add-data "$(ADDDATA)" \
+		Final_Release/main.py
+
+
+# ----------------------
+# Freeze dependencies
+# ----------------------
 freeze:
 	$(PIP) freeze > requirements.txt
 
-# Optional: upgrade core packaging tools
+
+# ----------------------
+# Upgrade pip/setuptools/wheel
+# ----------------------
 upgrade: venv
 	$(PIP) install --upgrade pip setuptools wheel
 
-# Optional: install from requirements.txt if present
+# ----------------------
+# Install from requirements.txt
+# ----------------------
 deps: venv
 	$(PIP) install -r requirements.txt
 
+# ----------------------
 # Clean artifacts
+# ----------------------
 clean:
 	rm -rf $(VENV_DIR) __pycache__ .pytest_cache .mypy_cache .ruff_cache
-	rm -rf naturo_config.json
-	rm -rf folder_tree.json
+	rm -rf naturo_config.json folder_tree.json
+	rm -rf dist build NaturoApp.spec
 	find . -name "*.pyc" -delete
 	find . -name "__pycache__" -type d -exec rm -rf {} +
 

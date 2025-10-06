@@ -1,10 +1,22 @@
 # main.py
 
 import sys
+import os
+
+# Handle paths correctly for PyInstaller
+if getattr(sys, 'frozen', False):
+    # Running in PyInstaller bundle
+    base_path = sys._MEIPASS
+else:
+    # Running as a script
+    base_path = os.path.dirname(os.path.abspath(__file__))
+
+sys.path.insert(0, base_path)
+
 from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout
-from .config import load_config, save_config, pick_root_dir
-from .folder_index import FolderIndex
-from .ui_search_tab import SearchTab
+from config import load_config, save_config, pick_root_dir
+from folder_index import FolderIndex
+from ui_search_tab import SearchTab
 
 class MainWindow(QMainWindow):
     def __init__(self):
