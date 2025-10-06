@@ -1,0 +1,9 @@
+bottle==0.13.4
+proxy_tools==0.1.0
+pyobjc-core==11.1
+pyobjc-framework-Cocoa==11.1
+pyobjc-framework-Quartz==11.1
+pyobjc-framework-Security==11.1
+pyobjc-framework-WebKit==11.1
+pywebview==6.0
+typing_extensions==4.15.0

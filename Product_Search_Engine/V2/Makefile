@@ -15,13 +15,14 @@ venv:
 # Install project dependencies
 install: venv
 	$(PIP) install --upgrade pip
+	$(PIP) install PySide6 pillow flask pywebview
 # Prefer requirements.txt if you have one; otherwise install directly:
 # $(PIP) install -r requirements.txt
 	$(PIP) install PySide6 pillow
 
 # Run the app as a package (requires V2/__init__.py and V2/main.py)
 run: venv
-	$(PYTHON) -m V2.main
+	$(PYTHON) -m Final_Release.main
 
 # Optional: show exact versions locked from current venv
 freeze:

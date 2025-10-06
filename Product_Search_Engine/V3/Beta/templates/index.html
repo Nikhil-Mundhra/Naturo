@@ -1,0 +1,62 @@
+<!-- templates/index.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Naturo Surfaces — Search</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">Naturo Surfaces</div>
+    <div class="rootinfo">Root: <strong id="root-name">{{ root_basename }}</strong></div>
+  </header>
+
+  <main class="container">
+    <section class="search-panel">
+      <div class="search-row">
+        <input id="code-input" placeholder='Enter product code (e.g. 63_PK_PV_BL_MRP_950_)' />
+        <button id="search-code-btn" class="btn primary">Search</button>
+        <button id="refresh-btn" class="btn">Refresh Index</button>
+      </div>
+
+      <div class="or">or</div>
+
+      <div class="qn-panel">
+        <div class="qn-row">
+          <select id="material-select"></select>
+          <select id="color-select"></select>
+          <select id="height-select">
+            <option value="">Height</option>
+            <option>8F</option>
+            <option>9F</option>
+            <option>9.5F</option>
+          </select>
+          <input id="width-input" placeholder='Width in inches' />
+          <button id="search-qn-btn" class="btn primary">Questionnaire Search</button>
+        </div>
+      </div>
+
+      <div id="active-filters" class="active-filters">No filters applied</div>
+    </section>
+
+    <section class="results-panel">
+      <div class="results-list" id="results-list"></div>
+      <div class="preview" id="preview">
+        <div class="preview-placeholder">Select a result to preview</div>
+        <img id="preview-img" alt="preview" />
+      </div>
+    </section>
+
+    <section class="debug-panel" id="debug-panel" hidden>
+      <h3>Debug</h3>
+      <pre id="debug-json"></pre>
+    </section>
+  </main>
+
+  <footer class="footer">Built with PyWebview · Local search</footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
