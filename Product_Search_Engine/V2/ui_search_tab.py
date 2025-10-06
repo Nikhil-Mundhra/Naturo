@@ -1,3 +1,5 @@
+# ui_search_tab.py
+
 import os
 from PIL import Image, ImageQt
 from PySide6.QtCore import Qt, QPropertyAnimation
@@ -7,6 +9,7 @@ from PySide6.QtWidgets import (
     QScrollArea, QCheckBox, QSizePolicy, QLabel, QPushButton, QStackedWidget,
     QRadioButton, QButtonGroup, QSplitter, QListWidget, QMessageBox, QListWidgetItem
 )
+from .parsing import build_selection  # add near imports
 
 from .constants import (
     MATERIAL_MAP, COLOR_MAP, DESIGN_CATEGORIES,
@@ -236,8 +239,6 @@ class SearchTab(QWidget):
         if not results:
             QMessageBox.information(self, "No Results", "No matching files found.")
 
-    from .parsing import build_selection  # add near imports
-
     def do_search_qn(self):
         # Collapse the panel to free space
         self.animate_height(HEIGHT_COLLAPSED_QN)
@@ -261,7 +262,7 @@ class SearchTab(QWidget):
             height=height,
             width_inches=width_in,
             color=color,
-            designs=designs,x
+            designs=designs,
             supplier=None,        # optionally add a Supplier dropdown later
             folder_code=None,     # optionally add Folder Code input later
             file_token=None       # optionally add extra token input later

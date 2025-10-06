@@ -1,3 +1,5 @@
+# folder_index.py
+
 import os
 import re
 import json
@@ -5,6 +7,7 @@ import hashlib
 from time import time
 from typing import Optional, Iterable, List, Dict, Tuple, Any
 from .constants import TREE_CACHE_FILE, FILE_EXTS
+from .matching import compute_match_score
 from .parsing import (
     normalize_token, make_searchable,
     extract_series_signatures, path_contains_any_signature,

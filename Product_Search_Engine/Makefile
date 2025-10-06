@@ -15,8 +15,8 @@ venv:
 # Install project dependencies
 install: venv
 	$(PIP) install --upgrade pip
-	# Prefer requirements.txt if you have one; otherwise install directly:
-	# $(PIP) install -r requirements.txt
+# Prefer requirements.txt if you have one; otherwise install directly:
+# $(PIP) install -r requirements.txt
 	$(PIP) install PySide6 pillow
 
 # Run the app as a package (requires V2/__init__.py and V2/main.py)
@@ -38,6 +38,8 @@ deps: venv
 # Clean artifacts
 clean:
 	rm -rf $(VENV_DIR) __pycache__ .pytest_cache .mypy_cache .ruff_cache
+	rm -rf naturo_config.json
+	rm -rf folder_tree.json
 	find . -name "*.pyc" -delete
 	find . -name "__pycache__" -type d -exec rm -rf {} +
 

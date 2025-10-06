@@ -1,3 +1,5 @@
+# constants.py
+
 # ---------------- CONFIG / CONSTANTS ----------------
 CONFIG_FILE = "naturo_config.json"
 TREE_CACHE_FILE = "folder_tree.json"

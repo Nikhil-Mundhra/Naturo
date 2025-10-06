@@ -1,3 +1,5 @@
+# ui_debug.py
+
 import json
 from PySide6.QtWidgets import QDialog, QVBoxLayout, QTextEdit
 
