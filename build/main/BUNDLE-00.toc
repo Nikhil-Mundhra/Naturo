@@ -1,4 +1,0 @@
-([('main',
-   '/Users/nikhil/Library/CloudStorage/GoogleDrive-silkxxxroute@gmail.com/My '
-   'Drive/Apps/dist/main',
-   'EXECUTABLE')],)

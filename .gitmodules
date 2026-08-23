@@ -1,0 +1,4 @@
+[submodule "naturoindustries.com"]
+	path = naturoindustries.com
+	url = https://github.com/Nikhil-Mundhra/NaturoIndustries.com.git
+	branch = prod
