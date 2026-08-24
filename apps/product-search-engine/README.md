@@ -7,6 +7,9 @@ A desktop and web search engine with catalog indexing for Naturo Surfaces.
 - **`desktop_qt/`**: Native PySide6 graphical interface with instant live search and image preview.
 - **`web_app/`**: Flask REST API with PyWebView embedded web interface.
 
+## Documentation
+- **[Product & Catalog Naming Standards](../../docs/product-naming-standards.md)**: Full taxonomy, product code anatomy, PDF catalog hierarchy, and search parser specifications.
+
 ## Quick Start
 
 ### 1. Install Dependencies

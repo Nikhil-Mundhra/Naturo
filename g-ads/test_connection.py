@@ -32,10 +32,7 @@ def main() -> None:
     )
 
     customer_service = client.get_service("CustomerService")
-    login_customer_id = os.environ["GOOGLE_ADS_LOGIN_CUSTOMER_ID"]
-    resource_names = customer_service.list_accessible_customers(
-        login_customer_id=login_customer_id
-    )
+    resource_names = customer_service.list_accessible_customers()
 
     print("Accessible customer accounts:")
     for resource_name in resource_names.resource_names:
