@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mockup 2: Inventory Sync & Ad Management Panel - Naturo Industries</title>
+  <style>
+    :root {
+      --primary: #2e7d32;
+      --primary-dark: #1b5e20;
+      --surface: #ffffff;
+      --background: #f8fafc;
+      --border: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --success: #16a34a;
+      --success-bg: #dcfce7;
+      --warning: #d97706;
+      --warning-bg: #fef3c7;
+      --danger: #dc2626;
+      --radius: 8px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; }
+    body { background: var(--background); color: var(--text-main); padding: 1.5rem; }
+    header { background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .logo { width: 34px; height: 34px; background: var(--primary); color: white; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+    .badge { background: #f1f5f9; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; color: #475569; }
+    .banner { background: #dcfce7; border: 1px solid #86efac; border-radius: var(--radius); padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+    .card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1.5rem; }
+    .btn { padding: 8px 14px; border: 1px solid var(--border); border-radius: var(--radius); background: white; font-size: 0.875rem; cursor: pointer; }
+    .btn-primary { background: var(--primary); color: white; border-color: transparent; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.875rem; text-align: left; }
+    th { background: #f8fafc; padding: 10px 12px; border-bottom: 1px solid var(--border); color: #475569; }
+    td { padding: 12px; border-bottom: 1px solid #f1f5f9; }
+    .status-enabled { background: #dcfce7; color: #16a34a; padding: 2px 8px; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
+    .status-paused { background: #fef3c7; color: #d97706; padding: 2px 8px; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
+    .log-box { background: #0f172a; color: #cbd5e1; font-family: monospace; font-size: 0.8rem; padding: 12px; border-radius: 6px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">N</div>
+      <div>
+        <h1 style="font-size: 1.1rem;">Naturo Industries <span class="badge">Automated Inventory Sync</span></h1>
+        <p style="font-size: 0.8rem; color: var(--text-muted);">Syncing MySQL Product Catalog with Google Ads Status</p>
+      </div>
+    </div>
+    <div>
+      <span class="badge" style="background: #e0f2fe; color: #0284c7;">API Service: AdGroupAdService & AdGroupService</span>
+    </div>
+  </header>
+
+  <div class="banner">
+    <div>
+      <h3 style="color: #14532d; font-size: 1rem;">Automated Hourly Catalog Sync is Active</h3>
+      <p style="font-size: 0.8rem; color: #166534;">Sync Interval: 60 minutes • Last run: Today, 09:00 AM • Next sync: 10:00 AM</p>
+    </div>
+    <button class="btn btn-primary">Trigger Manual Sync Now</button>
+  </div>
+
+  <div class="card">
+    <h3 style="font-size: 0.95rem; margin-bottom: 12px;">Live Inventory & Google Ads State Mapping</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Product / SKU</th>
+          <th>Stock Quantity</th>
+          <th>Google Ads Ad Group</th>
+          <th>Current Status</th>
+          <th>Last Synced</th>
+          <th>Sync Rule</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Charcoal Louvers 8x5 (Series A)</strong></td>
+          <td><span style="color: var(--success); font-weight: 600;">420 Sheets</span></td>
+          <td><code>AG_Charcoal_Louvers_A</code></td>
+          <td><span class="status-enabled">ENABLED</span></td>
+          <td>09:00:00 AM</td>
+          <td>Active (Stock > 10)</td>
+        </tr>
+        <tr>
+          <td><strong>Wooden Fluted Louvers (Series B)</strong></td>
+          <td><span style="color: var(--success); font-weight: 600;">180 Sheets</span></td>
+          <td><code>AG_Wooden_Louvers_B</code></td>
+          <td><span class="status-enabled">ENABLED</span></td>
+          <td>09:00:00 AM</td>
+          <td>Active (Stock > 10)</td>
+        </tr>
+        <tr style="background: #fffbeb;">
+          <td><strong>Acrylic High-Gloss Sheet (Marble White 3mm)</strong></td>
+          <td><span style="color: var(--danger); font-weight: 700;">0 Sheets (Out of Stock)</span></td>
+          <td><code>AG_Acrylic_Marble_White</code></td>
+          <td><span class="status-paused">PAUSED</span></td>
+          <td>08:00:12 AM</td>
+          <td><strong>Auto-Paused via API (Stock = 0)</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Fluted Wall Panels (8x4 ft)</strong></td>
+          <td><span style="color: var(--success); font-weight: 600;">95 Panels</span></td>
+          <td><code>AG_Fluted_Wall_Panels</code></td>
+          <td><span class="status-enabled">ENABLED</span></td>
+          <td>09:00:00 AM</td>
+          <td>Active (Stock > 10)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3 style="font-size: 0.95rem; margin-bottom: 8px;">Google Ads API Mutation Audit Stream</h3>
+    <div class="log-box">
+      [09:00:01] [CRON] Checking catalog inventory for 42 tracked product items...<br>
+      [09:00:02] [SQL] Status verified: 41 items in stock, 1 item out of stock.<br>
+      [09:00:03] [AdGroupAdService.MutateAdGroupAds] Customer 9428104491: Setting status=PAUSED on adGroupAd 182930491.<br>
+      [09:00:04] [SUCCESS] Google Ads API response 200 OK. Ad Group 'AG_Acrylic_Marble_White' paused successfully.<br>
+      [09:00:05] [HEARTBEAT] All Google Ads campaign and ad group states synchronized with warehouse stock.
+    </div>
+  </div>
+</body>
+</html>

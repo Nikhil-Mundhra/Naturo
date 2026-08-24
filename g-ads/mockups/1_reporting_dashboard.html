@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mockup 1: Ad Performance & Reporting Dashboard - Naturo Industries</title>
+  <style>
+    :root {
+      --primary: #2e7d32;
+      --primary-dark: #1b5e20;
+      --primary-light: #e8f5e9;
+      --surface: #ffffff;
+      --background: #f8fafc;
+      --border: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --success: #16a34a;
+      --success-bg: #dcfce7;
+      --radius: 8px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; }
+    body { background: var(--background); color: var(--text-main); padding: 1.5rem; }
+    header { background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .logo { width: 34px; height: 34px; background: var(--primary); color: white; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+    .badge { background: #f1f5f9; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; color: #475569; }
+    .controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; gap: 12px; }
+    select, .btn { padding: 8px 14px; border: 1px solid var(--border); border-radius: var(--radius); background: white; font-size: 0.875rem; cursor: pointer; }
+    .btn-primary { background: var(--primary); color: white; border-color: transparent; }
+    .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+    .card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; }
+    .metric-title { font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600; }
+    .metric-val { font-size: 1.5rem; font-weight: 700; margin: 4px 0; }
+    .metric-change { font-size: 0.75rem; color: var(--success); }
+    table { width: 100%; border-collapse: collapse; font-size: 0.875rem; text-align: left; }
+    th { background: #f8fafc; padding: 10px 12px; border-bottom: 1px solid var(--border); color: #475569; }
+    td { padding: 12px; border-bottom: 1px solid #f1f5f9; }
+    .status { background: var(--success-bg); color: var(--success); padding: 2px 8px; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
+    .chart-bar-wrap { height: 160px; display: flex; align-items: flex-end; gap: 20px; padding: 20px 0 0 0; }
+    .bar { flex: 1; background: linear-gradient(180deg, var(--primary), #a5d6a7); border-radius: 4px 4px 0 0; min-width: 40px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">N</div>
+      <div>
+        <h1 style="font-size: 1.1rem;">Naturo Industries <span class="badge">Internal Ads Reporting</span></h1>
+        <p style="font-size: 0.8rem; color: var(--text-muted);">Account: Naturo Main Search (942-810-4491)</p>
+      </div>
+    </div>
+    <div>
+      <span class="badge" style="background: #e0f2fe; color: #0284c7;">API Service: GoogleAdsService & CustomerService</span>
+    </div>
+  </header>
+
+  <div class="controls">
+    <div style="display: flex; gap: 10px;">
+      <select><option>Date Range: Last 30 Days</option><option>This Month</option></select>
+      <select><option>All Campaigns (Search)</option></select>
+    </div>
+    <div style="display: flex; gap: 10px;">
+      <button class="btn">Export PDF Report</button>
+      <button class="btn btn-primary">Sync Metrics from Google Ads API</button>
+    </div>
+  </div>
+
+  <div class="metrics">
+    <div class="card">
+      <div class="metric-title">Total Spend</div>
+      <div class="metric-val">₹1,18,450</div>
+      <div class="metric-change">↑ 4.2% vs prev period</div>
+    </div>
+    <div class="card">
+      <div class="metric-title">Total Impressions</div>
+      <div class="metric-val">48,210</div>
+      <div class="metric-change">↑ 12.8% vs prev period</div>
+    </div>
+    <div class="card">
+      <div class="metric-title">Clicks (CTR)</div>
+      <div class="metric-val">3,140 <span style="font-size: 0.9rem; font-weight: normal; color: var(--text-muted);">(6.51%)</span></div>
+      <div class="metric-change">↑ +0.6% CTR</div>
+    </div>
+    <div class="card">
+      <div class="metric-title">Avg. CPC</div>
+      <div class="metric-val">₹37.72</div>
+      <div class="metric-change" style="color: #64748b;">Stable</div>
+    </div>
+    <div class="card">
+      <div class="metric-title">B2B Leads & Calls</div>
+      <div class="metric-val">182</div>
+      <div class="metric-change">↑ 18.5% conv. rate</div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom: 1.5rem;">
+    <h3 style="font-size: 0.95rem; margin-bottom: 10px;">Weekly Clicks & Performance Volume (GAQL Metric Stream)</h3>
+    <div class="chart-bar-wrap">
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div class="bar" style="height: 60px; width: 80%;"></div><span style="font-size:0.75rem; margin-top:6px; color:#64748b;">Week 1</span></div>
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div class="bar" style="height: 90px; width: 80%;"></div><span style="font-size:0.75rem; margin-top:6px; color:#64748b;">Week 2</span></div>
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div class="bar" style="height: 110px; width: 80%;"></div><span style="font-size:0.75rem; margin-top:6px; color:#64748b;">Week 3</span></div>
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center;"><div class="bar" style="height: 140px; width: 80%;"></div><span style="font-size:0.75rem; margin-top:6px; color:#64748b;">Week 4 (Current)</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 style="font-size: 0.95rem; margin-bottom: 12px;">Active Product Search Campaigns</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Campaign</th>
+          <th>Status</th>
+          <th>Daily Budget</th>
+          <th>Clicks</th>
+          <th>Impressions</th>
+          <th>CTR</th>
+          <th>Avg CPC</th>
+          <th>Total Cost</th>
+          <th>Inquiries</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>IN_Search_Louvers_Charcoal_Panels</strong></td>
+          <td><span class="status">ENABLED</span></td>
+          <td>₹2,500/day</td>
+          <td>1,420</td>
+          <td>21,500</td>
+          <td>6.60%</td>
+          <td>₹38.40</td>
+          <td>₹54,528</td>
+          <td><strong>94</strong></td>
+        </tr>
+        <tr>
+          <td><strong>IN_Search_Acrylic_HighGloss_Sheets</strong></td>
+          <td><span class="status">ENABLED</span></td>
+          <td>₹1,800/day</td>
+          <td>980</td>
+          <td>14,200</td>
+          <td>6.90%</td>
+          <td>₹35.20</td>
+          <td>₹34,496</td>
+          <td><strong>58</strong></td>
+        </tr>
+        <tr>
+          <td><strong>IN_Search_Laminates_Architectural</strong></td>
+          <td><span class="status">ENABLED</span></td>
+          <td>₹1,500/day</td>
+          <td>740</td>
+          <td>12,510</td>
+          <td>5.91%</td>
+          <td>₹40.10</td>
+          <td>₹29,674</td>
+          <td><strong>30</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mockup 3: RSA & Keyword Builder - Naturo Industries</title>
+  <style>
+    :root {
+      --primary: #2e7d32;
+      --primary-dark: #1b5e20;
+      --surface: #ffffff;
+      --background: #f8fafc;
+      --border: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --success: #16a34a;
+      --warning: #d97706;
+      --radius: 8px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; }
+    body { background: var(--background); color: var(--text-main); padding: 1.5rem; }
+    header { background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .logo { width: 34px; height: 34px; background: var(--primary); color: white; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+    .badge { background: #f1f5f9; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; color: #475569; }
+    .layout { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1.5rem; }
+    .btn { padding: 8px 14px; border: 1px solid var(--border); border-radius: var(--radius); background: white; font-size: 0.875rem; cursor: pointer; }
+    .btn-primary { background: var(--primary); color: white; border-color: transparent; }
+    .form-group { margin-bottom: 12px; }
+    .label { font-size: 0.8rem; font-weight: 600; margin-bottom: 4px; display: flex; justify-content: space-between; }
+    input[type="text"] { width: 100%; padding: 8px 10px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.875rem; }
+    .ad-preview { background: #fafafa; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px; margin-top: 10px; }
+    .ad-title { font-size: 1.1rem; color: #1a0dab; text-decoration: none; margin: 4px 0; display: block; font-family: Arial, sans-serif; }
+    .ad-desc { font-size: 0.85rem; color: #4d5156; font-family: Arial, sans-serif; }
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .chip { background: #f1f5f9; border: 1px solid #cbd5e1; padding: 3px 8px; border-radius: 4px; font-size: 0.8rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">N</div>
+      <div>
+        <h1 style="font-size: 1.1rem;">Naturo Industries <span class="badge">Campaign & RSA Builder</span></h1>
+        <p style="font-size: 0.8rem; color: var(--text-muted);">Manage Responsive Search Ads & Shared Negative Keyword Lists</p>
+      </div>
+    </div>
+    <div>
+      <span class="badge" style="background: #e0f2fe; color: #0284c7;">API Service: AdGroupAdService, AdGroupCriterionService, CampaignCriterionService</span>
+    </div>
+  </header>
+
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+    <div style="display: flex; gap: 10px; align-items: center;">
+      <span style="font-size: 0.85rem; font-weight: 600;">Campaign:</span>
+      <select style="padding: 6px 10px; border-radius: 6px; border: 1px solid var(--border);"><option>IN_Search_Louvers_Charcoal_Panels</option></select>
+      <span style="font-size: 0.85rem; font-weight: 600; margin-left: 8px;">Ad Group:</span>
+      <select style="padding: 6px 10px; border-radius: 6px; border: 1px solid var(--border);"><option>Charcoal_Louvers_Interior (SKAG)</option></select>
+    </div>
+    <div style="display: flex; gap: 10px;">
+      <button class="btn">Apply Universal Negative List</button>
+      <button class="btn btn-primary">Deploy to Google Ads (Paused for Review)</button>
+    </div>
+  </div>
+
+  <div class="layout">
+    <div class="card">
+      <h3 style="font-size: 0.95rem; margin-bottom: 14px;">Responsive Search Ad Configuration</h3>
+      <div class="form-group">
+        <div class="label"><span>Final URL</span></div>
+        <input type="text" value="https://naturoindustries.com/products">
+      </div>
+      <div class="form-group">
+        <div class="label"><span>Headline 1</span> <span style="font-weight: normal; color: var(--text-muted);">30/30</span></div>
+        <input type="text" value="Premium Charcoal Louver Panels">
+      </div>
+      <div class="form-group">
+        <div class="label"><span>Headline 2</span> <span style="font-weight: normal; color: var(--text-muted);">29/30</span></div>
+        <input type="text" value="Modern Wall Interior Surfaces">
+      </div>
+      <div class="form-group">
+        <div class="label"><span>Headline 3</span> <span style="font-weight: normal; color: var(--text-muted);">23/30</span></div>
+        <input type="text" value="Naturo Interior Surfaces">
+      </div>
+      <div class="form-group">
+        <div class="label"><span>Description 1</span> <span style="font-weight: normal; color: var(--text-muted);">77/90</span></div>
+        <input type="text" value="Explore premium decorative wall louvers and architectural panels. Direct supply.">
+      </div>
+      <div class="form-group">
+        <div class="label"><span>Description 2</span> <span style="font-weight: normal; color: var(--text-muted);">82/90</span></div>
+        <input type="text" value="Manufactured for architects, interior designers & contractors across India. Call now.">
+      </div>
+    </div>
+
+    <div>
+      <div class="card">
+        <h3 style="font-size: 0.95rem; margin-bottom: 6px;">Live Google Search Ad Preview</h3>
+        <div class="ad-preview">
+          <div style="font-size: 0.75rem; font-weight: bold; color: #202124;">Sponsored</div>
+          <div style="font-size: 0.8rem; color: #202124;">naturoindustries.com/products</div>
+          <a class="ad-title" href="#">Premium Charcoal Louver Panels | Modern Wall Interior Surfaces | Naturo</a>
+          <div class="ad-desc">Explore premium decorative wall louvers and architectural panels. Direct supply. Manufactured for architects, interior designers & contractors across India. Call now.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 style="font-size: 0.95rem; margin-bottom: 6px;">Universal Negative Keywords (Shared List)</h3>
+        <p style="font-size: 0.8rem; color: var(--text-muted);">Managed via CampaignCriterionService to prevent non-buyer traffic:</p>
+        <div class="chips">
+          <span class="chip">"free repair" ×</span>
+          <span class="chip">"jobs" ×</span>
+          <span class="chip">"how to make wall panels" ×</span>
+          <span class="chip">"diy louver installation" ×</span>
+          <span class="chip">[resume] ×</span>
+          <span class="chip">[salary] ×</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

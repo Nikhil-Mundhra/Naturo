@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Naturo Industries - Google Ads API Management Portal</title>
+  <style>
+    :root {
+      --primary: #2e7d32;
+      --primary-dark: #1b5e20;
+      --primary-light: #e8f5e9;
+      --primary-border: #a5d6a7;
+      --surface: #ffffff;
+      --background: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+      --border-subtle: #edf2f7;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-subtle: #94a3b8;
+      --success: #16a34a;
+      --success-bg: #dcfce7;
+      --warning: #d97706;
+      --warning-bg: #fef3c7;
+      --danger: #dc2626;
+      --danger-bg: #fee2e2;
+      --info: #0284c7;
+      --info-bg: #e0f2fe;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--background);
+      color: var(--text-main);
+      line-height: 1.5;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Top App Bar */
+    header.app-header {
+      background-color: #ffffff;
+      border-bottom: 1px solid var(--border);
+      padding: 0 1.5rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 800;
+      font-size: 1.2rem;
+      letter-spacing: -1px;
+    }
+
+    .brand-info h1 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .badge-internal {
+      background: #f1f5f9;
+      color: #475569;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border: 1px solid #cbd5e1;
+    }
+
+    .brand-info p {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .account-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 0.8rem;
+    }
+
+    .account-badge .status-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--success);
+      border-radius: 50%;
+    }
+
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-main);
+    }
+
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: #475569;
+      font-size: 0.8rem;
+    }
+
+    /* Navigation Bar */
+    nav.app-nav {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      padding: 0 1.5rem;
+      display: flex;
+      gap: 8px;
+    }
+
+    .nav-tab {
+      padding: 12px 16px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.15s ease;
+      text-decoration: none;
+    }
+
+    .nav-tab:hover {
+      color: var(--text-main);
+    }
+
+    .nav-tab.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+      font-weight: 600;
+    }
+
+    .nav-tab svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* Main Container */
+    main.main-content {
+      flex: 1;
+      padding: 1.5rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .tab-pane {
+      display: none;
+    }
+
+    .tab-pane.active {
+      display: block;
+      animation: fadeIn 0.2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Sub-header Controls */
+    .controls-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .controls-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .select-input, .date-input, .text-input {
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: #ffffff;
+      font-size: 0.875rem;
+      color: var(--text-main);
+      outline: none;
+    }
+
+    .select-input:focus, .date-input:focus, .text-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.15);
+    }
+
+    .btn {
+      padding: 8px 16px;
+      border-radius: var(--radius);
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid transparent;
+      transition: all 0.15s ease;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+    }
+
+    .btn-outline {
+      background-color: #ffffff;
+      border-color: var(--border);
+      color: var(--text-main);
+    }
+
+    .btn-outline:hover {
+      background-color: #f8fafc;
+      border-color: #cbd5e1;
+    }
+
+    .btn-sm {
+      padding: 4px 10px;
+      font-size: 0.75rem;
+    }
+
+    /* Metric Cards Grid */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .metric-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .metric-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .metric-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .metric-change {
+      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .metric-change.positive { color: var(--success); }
+    .metric-change.neutral { color: var(--text-muted); }
+
+    /* Cards & Containers */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+    }
+
+    .card-header {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #ffffff;
+    }
+
+    .card-header h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-body {
+      padding: 1.25rem;
+    }
+
+    /* Tables */
+    .table-container {
+      overflow-x: auto;
+    }
+
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.875rem;
+    }
+
+    table.data-table th {
+      background: #f8fafc;
+      padding: 10px 14px;
+      font-weight: 600;
+      color: #475569;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    table.data-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      vertical-align: middle;
+    }
+
+    table.data-table tr:hover {
+      background-color: #f8fafc;
+    }
+
+    /* Status Pills */
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 8px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .status-pill.enabled {
+      background-color: var(--success-bg);
+      color: var(--success);
+    }
+
+    .status-pill.paused {
+      background-color: var(--warning-bg);
+      color: var(--warning);
+    }
+
+    .status-pill.active-sync {
+      background-color: var(--info-bg);
+      color: var(--info);
+    }
+
+    .status-dot-sm {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: currentColor;
+    }
+
+    /* Chart Placeholder Simulation */
+    .chart-container {
+      height: 180px;
+      display: flex;
+      align-items: flex-end;
+      gap: 14px;
+      padding: 10px 0 20px 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1rem;
+    }
+
+    .chart-bar-group {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      height: 100%;
+      justify-content: flex-end;
+    }
+
+    .chart-bar {
+      width: 100%;
+      max-width: 42px;
+      background: linear-gradient(180deg, var(--primary), var(--primary-border));
+      border-radius: 4px 4px 0 0;
+      transition: height 0.3s ease;
+    }
+
+    .chart-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    /* Inventory Sync Specifics */
+    .sync-banner {
+      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+      border: 1px solid var(--primary-border);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .sync-status-details {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .sync-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sync-meta h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+
+    .sync-meta p {
+      font-size: 0.8rem;
+      color: #335334;
+    }
+
+    /* Campaign & RSA Builder Layout */
+    .builder-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .builder-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #334155;
+      margin-bottom: 4px;
+    }
+
+    .form-counter {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: normal;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 0.875rem;
+    }
+
+    /* Ad Preview Card */
+    .ad-preview-box {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .ad-preview-header {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .google-ad-container {
+      padding: 1rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      background: #fafafa;
+    }
+
+    .ad-sponsor-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #202124;
+      margin-bottom: 2px;
+    }
+
+    .ad-display-url {
+      font-size: 0.8rem;
+      color: #202124;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .ad-display-url .site-icon {
+      width: 14px;
+      height: 14px;
+      background: var(--primary);
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .ad-title {
+      font-size: 1.15rem;
+      color: #1a0dab;
+      text-decoration: none;
+      line-height: 1.3;
+      margin-bottom: 4px;
+      display: block;
+      font-family: Arial, sans-serif;
+    }
+
+    .ad-description {
+      font-size: 0.85rem;
+      color: #4d5156;
+      line-height: 1.4;
+      font-family: Arial, sans-serif;
+    }
+
+    .ad-sitelinks {
+      display: flex;
+      gap: 12px;
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px solid #e8eaed;
+      flex-wrap: wrap;
+    }
+
+    .ad-sitelink-item {
+      font-size: 0.8rem;
+      color: #1a0dab;
+      font-weight: 500;
+    }
+
+    /* Tag Cloud for Negative Keywords */
+    .tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: #f8fafc;
+      min-height: 80px;
+    }
+
+    .tag-chip {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      padding: 4px 8px;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #334155;
+    }
+
+    .tag-chip .remove-tag {
+      cursor: pointer;
+      color: var(--text-muted);
+      font-weight: bold;
+    }
+
+    .tag-chip .remove-tag:hover {
+      color: var(--danger);
+    }
+
+    /* API Log Drawer / Feed */
+    .log-feed {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.78rem;
+      background: #0f172a;
+      color: #cbd5e1;
+      padding: 12px;
+      border-radius: var(--radius);
+      max-height: 180px;
+      overflow-y: auto;
+    }
+
+    .log-line {
+      margin-bottom: 4px;
+      line-height: 1.4;
+    }
+
+    .log-time { color: #64748b; }
+    .log-success { color: #4ade80; }
+    .log-api { color: #38bdf8; }
+    .log-warn { color: #fbbf24; }
+
+    /* Footer */
+    footer.app-footer {
+      background: #ffffff;
+      border-top: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Application Header -->
+  <header class="app-header">
+    <div class="brand-section">
+      <div class="brand-logo">N</div>
+      <div class="brand-info">
+        <h1>Naturo Industries <span class="badge-internal">Internal Ads Tool</span></h1>
+        <p>Google Ads API Manager & Inventory Synchronization Hub</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <div class="account-badge">
+        <span class="status-dot"></span>
+        <span>Account: <strong>Naturo Primary (942-810-4491)</strong></span>
+      </div>
+      <div class="user-profile">
+        <div class="user-avatar">NM</div>
+        <span>In-House Ad Manager</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Top Navigation Tabs -->
+  <nav class="app-nav">
+    <a class="nav-tab active" onclick="switchTab('tab-reporting')">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+      </svg>
+      1. Ad Performance & Reporting
+    </a>
+    <a class="nav-tab" onclick="switchTab('tab-inventory')">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+      </svg>
+      2. Automated Inventory Sync
+    </a>
+    <a class="nav-tab" onclick="switchTab('tab-builder')">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+      </svg>
+      3. RSA & Keyword Builder
+    </a>
+  </nav>
+
+  <!-- Main Content Area -->
+  <main class="main-content">
+
+    <!-- ========================================== -->
+    <!-- TAB 1: Ad Performance & Reporting Dashboard -->
+    <!-- ========================================== -->
+    <div id="tab-reporting" class="tab-pane active">
+      <div class="controls-bar">
+        <div class="controls-group">
+          <select class="select-input">
+            <option>Last 30 Days (Jul 25 - Aug 24)</option>
+            <option>This Month (August 2026)</option>
+            <option>Last 7 Days</option>
+            <option>Custom Date Range...</option>
+          </select>
+          <select class="select-input">
+            <option>All Campaigns (Search & Surface Products)</option>
+            <option>Louvers & Panels Only</option>
+            <option>Laminates & Acrylic Only</option>
+          </select>
+        </div>
+        <div class="controls-group">
+          <button class="btn btn-outline" onclick="triggerReportDownload()">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            Export PDF Report
+          </button>
+          <button class="btn btn-primary" onclick="syncMetricsNow()">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            Sync Metrics via GoogleAdsService
+          </button>
+        </div>
+      </div>
+
+      <!-- KPI Summary Cards -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-title">Total Ad Spend</div>
+          <div class="metric-value">₹1,18,450</div>
+          <div class="metric-change positive">↑ 4.2% vs last month</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-title">Impressions</div>
+          <div class="metric-value">48,210</div>
+          <div class="metric-change positive">↑ 12.8% vs last month</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-title">Clicks (CTR)</div>
+          <div class="metric-value">3,140 <span style="font-size: 0.9rem; color: var(--text-muted); font-weight: normal;">(6.51%)</span></div>
+          <div class="metric-change positive">↑ +0.6% CTR</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-title">Avg CPC</div>
+          <div class="metric-value">₹37.72</div>
+          <div class="metric-change neutral">↔ Stable (-1.1%)</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-title">Inquiries & Leads</div>
+          <div class="metric-value">182</div>
+          <div class="metric-change positive">↑ 18.5% conversion rate</div>
+        </div>
+      </div>
+
+      <!-- Performance Trends Chart -->
+      <div class="card">
+        <div class="card-header">
+          <h2>
+            <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+            </svg>
+            Weekly Clicks & Impressions Trend (GoogleAdsService.SearchStream)
+          </h2>
+          <span style="font-size: 0.8rem; color: var(--text-muted);">GAQL Query: <code>SELECT metrics.clicks, metrics.impressions FROM campaign</code></span>
+        </div>
+        <div class="card-body">
+          <div class="chart-container">
+            <div class="chart-bar-group">
+              <div class="chart-bar" style="height: 45%;"></div>
+              <span class="chart-label">Week 1</span>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar" style="height: 65%;"></div>
+              <span class="chart-label">Week 2</span>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar" style="height: 80%;"></div>
+              <span class="chart-label">Week 3</span>
+            </div>
+            <div class="chart-bar-group">
+              <div class="chart-bar" style="height: 95%;"></div>
+              <span class="chart-label">Week 4 (Current)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Campaign Breakdown Table -->
+      <div class="card">
+        <div class="card-header">
+          <h2>Active Product Campaigns (Pulled from Customer & Campaign Resources)</h2>
+          <button class="btn btn-outline btn-sm">Filter Columns</button>
+        </div>
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Campaign Name</th>
+                <th>Status</th>
+                <th>Daily Budget</th>
+                <th>Clicks</th>
+                <th>Impressions</th>
+                <th>CTR</th>
+                <th>Avg. CPC</th>
+                <th>Total Cost</th>
+                <th>Leads/Inquiries</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>IN_Search_Louvers_Charcoal_Panels</strong></td>
+                <td><span class="status-pill enabled"><span class="status-dot-sm"></span> ENABLED</span></td>
+                <td>₹2,500/day</td>
+                <td>1,420</td>
+                <td>21,500</td>
+                <td>6.60%</td>
+                <td>₹38.40</td>
+                <td>₹54,528</td>
+                <td><strong>94</strong></td>
+                <td><button class="btn btn-outline btn-sm">Inspect</button></td>
+              </tr>
+              <tr>
+                <td><strong>IN_Search_Acrylic_HighGloss_Sheets</strong></td>
+                <td><span class="status-pill enabled"><span class="status-dot-sm"></span> ENABLED</span></td>
+                <td>₹1,800/day</td>
+                <td>980</td>
+                <td>14,200</td>
+                <td>6.90%</td>
+                <td>₹35.20</td>
+                <td>₹34,496</td>
+                <td><strong>58</strong></td>
+                <td><button class="btn btn-outline btn-sm">Inspect</button></td>
+              </tr>
+              <tr>
+                <td><strong>IN_Search_Laminates_Architectural</strong></td>
+                <td><span class="status-pill enabled"><span class="status-dot-sm"></span> ENABLED</span></td>
+                <td>₹1,500/day</td>
+                <td>740</td>
+                <td>12,510</td>
+                <td>5.91%</td>
+                <td>₹40.10</td>
+                <td>₹29,674</td>
+                <td><strong>30</strong></td>
+                <td><button class="btn btn-outline btn-sm">Inspect</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 2: Automated Inventory Sync Panel       -->
+    <!-- ========================================== -->
+    <div id="tab-inventory" class="tab-pane">
+      
+      <!-- Automated Sync Banner -->
+      <div class="sync-banner">
+        <div class="sync-status-details">
+          <div class="sync-icon">
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <div class="sync-meta">
+            <h3>Hourly Catalog & Inventory Sync Active</h3>
+            <p>Database sync daemon runs every 60 min • Last executed: <strong>Today at 09:00:00 AM</strong> • Next: <strong>10:00:00 AM</strong></p>
+          </div>
+        </div>
+        <div class="controls-group">
+          <button class="btn btn-primary" onclick="runManualSync()">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            Trigger Manual Inventory Sync Now
+          </button>
+        </div>
+      </div>
+
+      <!-- Inventory-to-Ad Mapping Table -->
+      <div class="card">
+        <div class="card-header">
+          <h2>Product Inventory & Google Ads State Mapping (AdGroupAdService & AdGroupService)</h2>
+          <span class="status-pill active-sync"><span class="status-dot-sm"></span> 4 Categories Monitored</span>
+        </div>
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Product SKU / Category</th>
+                <th>Category</th>
+                <th>Current Stock</th>
+                <th>Target Ad Group</th>
+                <th>Google Ads Status</th>
+                <th>Last API Mutation</th>
+                <th>Auto-Sync Policy</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Charcoal Louver Panel - 8x5 inch (Series A)</strong></td>
+                <td>Louvers</td>
+                <td><span style="color: var(--success); font-weight: 600;">420 Sheets in Stock</span></td>
+                <td><code>AG_Charcoal_Louvers_A</code></td>
+                <td><span class="status-pill enabled"><span class="status-dot-sm"></span> ENABLED</span></td>
+                <td>2026-08-24 06:00:00</td>
+                <td>Auto-enabled (Stock > 10)</td>
+              </tr>
+              <tr>
+                <td><strong>Wooden Fluted Louvers (Series B)</strong></td>
+                <td>Louvers</td>
+                <td><span style="color: var(--success); font-weight: 600;">180 Sheets in Stock</span></td>
+                <td><code>AG_Wooden_Louvers_B</code></td>
+                <td><span class="status-pill enabled"><span class="status-dot-sm"></span> ENABLED</span></td>
+                <td>2026-08-24 06:00:00</td>
+                <td>Auto-enabled (Stock > 10)</td>
+              </tr>
+              <tr style="background-color: #fffbeb;">
+                <td><strong>Acrylic High-Gloss Sheet (Marble White 3mm)</strong></td>
+                <td>Acrylic</td>
+                <td><span style="color: var(--danger); font-weight: 700;">0 Sheets (Out of Stock)</span></td>
+                <td><code>AG_Acrylic_Marble_White</code></td>
+                <td><span class="status-pill paused"><span class="status-dot-sm"></span> PAUSED</span></td>
+                <td>2026-08-24 08:00:12 (Auto-Paused)</td>
+                <td><strong>Paused via API (Stock = 0)</strong></td>
+              </tr>
+              <tr>
+                <td><strong>Fluted Wall Decorative Panel (8x4 ft)</strong></td>
+                <td>Wall Panels</td>
+                <td><span style="color: var(--success); font-weight: 600;">95 Panels in Stock</span></td>
+                <td><code>AG_Fluted_Wall_Panels</code></td>
+                <td><span class="status-pill enabled"><span class="status-dot-sm"></span> ENABLED</span></td>
+                <td>2026-08-24 06:00:00</td>
+                <td>Auto-enabled (Stock > 10)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Real-Time Sync API Audit Log -->
+      <div class="card">
+        <div class="card-header">
+          <h2>Google Ads API Sync Audit Stream (MutateAdGroupAds & MutateAdGroups)</h2>
+          <button class="btn btn-outline btn-sm" onclick="clearLogs()">Clear Console</button>
+        </div>
+        <div class="card-body">
+          <div class="log-feed" id="api-log-feed">
+            <div class="log-line"><span class="log-time">[09:00:01]</span> <span class="log-api">[API Cron]</span> Initiating catalog stock verification across 42 active SKUs...</div>
+            <div class="log-line"><span class="log-time">[09:00:02]</span> <span class="log-api">[SQL DB]</span> Inventory state parsed. Out-of-stock items detected: 1 (SKU: ACR-MB-03).</div>
+            <div class="log-line"><span class="log-time">[09:00:03]</span> <span class="log-warn">[AdGroupAdService]</span> MutateAdGroupAds: Setting status=PAUSED on resource customers/9428104491/adGroupAds/182930491.</div>
+            <div class="log-line"><span class="log-time">[09:00:04]</span> <span class="log-success">[SUCCESS]</span> Google Ads API response 200 OK. Ad Group 'AG_Acrylic_Marble_White' paused successfully.</div>
+            <div class="log-line"><span class="log-time">[09:00:05]</span> <span class="log-api">[GoogleAdsService]</span> Heartbeat OK. All remaining 41 ad group statuses verified in sync.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 3: RSA & Keyword Builder               -->
+    <!-- ========================================== -->
+    <div id="tab-builder" class="tab-pane">
+      <div class="controls-bar">
+        <div class="controls-group">
+          <label style="font-size: 0.85rem; font-weight: 600;">Target Campaign:</label>
+          <select class="select-input">
+            <option>IN_Search_Louvers_Charcoal_Panels</option>
+            <option>IN_Search_Acrylic_HighGloss_Sheets</option>
+            <option>IN_Search_Laminates_Architectural</option>
+          </select>
+          <label style="font-size: 0.85rem; font-weight: 600; margin-left: 8px;">Ad Group:</label>
+          <select class="select-input">
+            <option>Charcoal_Louvers_Interior (SKAG)</option>
+            <option>Wooden_Louvers_Acoustic</option>
+          </select>
+        </div>
+        <div class="controls-group">
+          <button class="btn btn-outline" onclick="applyNegativeList()">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+            </svg>
+            Apply Universal Negative List
+          </button>
+          <button class="btn btn-primary" onclick="deployAdToApi()">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            Deploy RSA via AdGroupAdService
+          </button>
+        </div>
+      </div>
+
+      <div class="builder-layout">
+        <!-- Left Column: RSA Form Editor -->
+        <div class="card">
+          <div class="card-header">
+            <h2>Responsive Search Ad Editor (AdGroupAdService.MutateAdGroupAds)</h2>
+            <span class="status-pill paused">Staging (PAUSED)</span>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <label class="form-label">
+                <span>Final URL</span>
+              </label>
+              <input type="text" id="input-url" class="form-input" value="https://naturoindustries.com/products" oninput="updateAdPreview()">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">
+                <span>Headline 1 (Brand / Product)</span>
+                <span class="form-counter" id="count-h1">30/30</span>
+              </label>
+              <input type="text" id="input-h1" class="form-input" maxlength="30" value="Premium Charcoal Louver Panels" oninput="updateAdPreview()">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">
+                <span>Headline 2 (Call to Action / Spec)</span>
+                <span class="form-counter" id="count-h2">29/30</span>
+              </label>
+              <input type="text" id="input-h2" class="form-input" maxlength="30" value="Modern Wall Interior Surfaces" oninput="updateAdPreview()">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">
+                <span>Headline 3 (Manufacturer Trust)</span>
+                <span class="form-counter" id="count-h3">23/30</span>
+              </label>
+              <input type="text" id="input-h3" class="form-input" maxlength="30" value="Naturo Interior Surfaces" oninput="updateAdPreview()">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">
+                <span>Description 1</span>
+                <span class="form-counter" id="count-d1">77/90</span>
+              </label>
+              <input type="text" id="input-d1" class="form-input" maxlength="90" value="Explore premium decorative wall louvers and architectural panels. Direct supply." oninput="updateAdPreview()">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">
+                <span>Description 2</span>
+                <span class="form-counter" id="count-d2">82/90</span>
+              </label>
+              <input type="text" id="input-d2" class="form-input" maxlength="90" value="Manufactured for architects, interior designers & contractors across India. Call now." oninput="updateAdPreview()">
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Live Google Search Ad Preview & Negative Keywords -->
+        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+          <!-- Google Search Preview -->
+          <div class="ad-preview-box">
+            <div class="ad-preview-header">
+              <span>Google Search Ad Preview</span>
+              <span style="color: var(--success); font-weight: 600;">Ad Strength: Excellent</span>
+            </div>
+            
+            <div class="google-ad-container">
+              <div class="ad-sponsor-label">Sponsored</div>
+              <div class="ad-display-url">
+                <span class="site-icon"></span>
+                <span id="preview-url-text">naturoindustries.com/products</span>
+              </div>
+              <a href="#" class="ad-title" id="preview-title">
+                Premium Charcoal Louver Panels | Modern Wall Interior Surfaces | Naturo
+              </a>
+              <div class="ad-description" id="preview-desc">
+                Explore premium decorative wall louvers and architectural panels. Direct supply. Manufactured for architects, interior designers & contractors across India. Call now.
+              </div>
+              <div class="ad-sitelinks">
+                <span class="ad-sitelink-item">Wall Panels Catalog</span>
+                <span class="ad-sitelink-item">Laminates & Louvers</span>
+                <span class="ad-sitelink-item">Request B2B Quote</span>
+                <span class="ad-sitelink-item">Contact Naturo</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Negative Keywords Section -->
+          <div class="card">
+            <div class="card-header">
+              <h2>Shared Negative Keyword List (CampaignCriterionService)</h2>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">List: Universal_B2B_Exclusions</span>
+            </div>
+            <div class="card-body">
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px;">
+                Excluded terms automatically applied to prevent non-commercial & DIY query clicks:
+              </p>
+              <div class="tag-cloud" id="tag-cloud">
+                <div class="tag-chip"><span>"free repair"</span> <span class="remove-tag">×</span></div>
+                <div class="tag-chip"><span>"jobs"</span> <span class="remove-tag">×</span></div>
+                <div class="tag-chip"><span>"how to make wall panels"</span> <span class="remove-tag">×</span></div>
+                <div class="tag-chip"><span>"diy louver installation"</span> <span class="remove-tag">×</span></div>
+                <div class="tag-chip"><span>[resume]</span> <span class="remove-tag">×</span></div>
+                <div class="tag-chip"><span>[salary]</span> <span class="remove-tag">×</span></div>
+                <div class="tag-chip"><span>"used panels for free"</span> <span class="remove-tag">×</span></div>
+              </div>
+              <div style="margin-top: 10px; display: flex; gap: 8px;">
+                <input type="text" class="form-input" id="new-neg-keyword" placeholder="Add negative keyword (e.g. 'course')...">
+                <button class="btn btn-outline" onclick="addNegativeKeyword()">Add</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Application Footer -->
+  <footer class="app-footer">
+    <div>
+      <strong>Naturo Industries</strong> (Naturo Interior Surfaces) • Proprietary Internal Application
+    </div>
+    <div>
+      Connected via <strong>Google Ads API v17/v18</strong> • OAuth 2.0 Desktop/Web Client
+    </div>
+  </footer>
+
+  <!-- Interactive JavaScript logic -->
+  <script>
+    function switchTab(tabId) {
+      document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+      
+      const activeNav = Array.from(document.querySelectorAll('.nav-tab')).find(tab => tab.getAttribute('onclick').includes(tabId));
+      if (activeNav) activeNav.classList.add('active');
+      
+      const targetPane = document.getElementById(tabId);
+      if (targetPane) targetPane.classList.add('active');
+    }
+
+    function updateAdPreview() {
+      const h1 = document.getElementById('input-h1').value;
+      const h2 = document.getElementById('input-h2').value;
+      const h3 = document.getElementById('input-h3').value;
+      const d1 = document.getElementById('input-d1').value;
+      const d2 = document.getElementById('input-d2').value;
+      const url = document.getElementById('input-url').value;
+
+      document.getElementById('count-h1').textContent = `${h1.length}/30`;
+      document.getElementById('count-h2').textContent = `${h2.length}/30`;
+      document.getElementById('count-h3').textContent = `${h3.length}/30`;
+      document.getElementById('count-d1').textContent = `${d1.length}/90`;
+      document.getElementById('count-d2').textContent = `${d2.length}/90`;
+
+      document.getElementById('preview-title').textContent = `${h1} | ${h2} | ${h3}`;
+      document.getElementById('preview-desc').textContent = `${d1} ${d2}`;
+      
+      try {
+        const cleanUrl = url.replace(/^https?:\/\//, '');
+        document.getElementById('preview-url-text').textContent = cleanUrl;
+      } catch (e) {}
+    }
+
+    function triggerReportDownload() {
+      alert('Generating executive PDF report from Google Ads performance database...');
+    }
+
+    function syncMetricsNow() {
+      alert('Invoking GoogleAdsService.SearchStream to pull latest campaign & customer metrics...');
+    }
+
+    function runManualSync() {
+      const feed = document.getElementById('api-log-feed');
+      const timeStr = new Date().toTimeString().split(' ')[0];
+      const newEntry = `
+        <div class="log-line"><span class="log-time">[${timeStr}]</span> <span class="log-api">[Manual Trigger]</span> Scanning MySQL product inventory catalog...</div>
+        <div class="log-line"><span class="log-time">[${timeStr}]</span> <span class="log-success">[AdGroupAdService]</span> MutateAdGroupAds: All ad group states verified up-to-date with stock.</div>
+      `;
+      feed.innerHTML += newEntry;
+      feed.scrollTop = feed.scrollHeight;
+    }
+
+    function clearLogs() {
+      document.getElementById('api-log-feed').innerHTML = '<div class="log-line"><span class="log-time">[System]</span> Log cleared. Awaiting next hourly sync...</div>';
+    }
+
+    function addNegativeKeyword() {
+      const input = document.getElementById('new-neg-keyword');
+      const val = input.value.trim();
+      if (!val) return;
+      
+      const cloud = document.getElementById('tag-cloud');
+      const chip = document.createElement('div');
+      chip.className = 'tag-chip';
+      chip.innerHTML = `<span>${val}</span> <span class="remove-tag" onclick="this.parentElement.remove()">×</span>`;
+      cloud.appendChild(chip);
+      input.value = '';
+    }
+
+    function deployAdToApi() {
+      alert('Deploying Responsive Search Ad to Google Ads account (942-810-4491) via AdGroupAdService. Status set to PAUSED for internal approval.');
+    }
+
+    function applyNegativeList() {
+      alert('Applying Shared Universal Negative Keyword List via CampaignCriterionService.MutateCampaignCriteria...');
+    }
+
+    // Initialize character counters
+    updateAdPreview();
+  </script>
+</body>
+</html>
